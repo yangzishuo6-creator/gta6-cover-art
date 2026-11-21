@@ -20,12 +20,15 @@
         <h2>Composition</h2>
         <div class="field">Layout</div>
         <div class="choices layouts" role="group" aria-label="Layout">
-          <button data-layout="mosaic" aria-pressed="true">▦ <span>Mosaic</span></button>
-          <button data-layout="triptych" aria-pressed="false">▥ <span>Triptych</span></button>
-          <button data-layout="duo" aria-pressed="false">◫ <span>Split</span></button>
+          <button data-layout="tiled" aria-pressed="true">▦ <span>Hero + 5</span></button>
+          <button data-layout="hero" aria-pressed="false">◧ <span>Hero + 3</span></button>
+          <button data-layout="mosaic" aria-pressed="false">⊞ <span>2 × 2</span></button>
+          <button data-layout="triptych" aria-pressed="false">▥ <span>Strip</span></button>
         </div>
         <label class="field" for="caption">Cover caption</label>
-        <input id="caption" maxlength="48" value="AFTER HOURS">
+        <input id="caption" maxlength="48" value="AFTERLIGHT">
+        <label class="field" for="subtitle">Subtitle <span class="optional">Optional</span></label>
+        <input id="subtitle" maxlength="56" value="A SUNSET COAST STORY">
         <div class="field">Color grade</div>
         <div class="choices grades" role="group" aria-label="Color grade">
           <button data-grade="sunset" aria-pressed="true">Sunset</button>
@@ -39,23 +42,25 @@
         <select id="format">
           <option value="square">Square · 1080 × 1080</option>
           <option value="portrait">Portrait · 1080 × 1350</option>
-          <option value="wide">Wide · 1920 × 1080</option>
+          <option value="wide" selected>Wide · 1920 × 1080</option>
         </select>
-        <button id="export" class="primary">↓ &nbsp; Download PNG</button>
+        <button id="export" class="primary" disabled>↓ &nbsp; Download PNG</button>
         <p id="status" role="status"></p>
       </section>
     </aside>
     <section class="workspace" aria-labelledby="preview-title">
-      <div class="workbar"><h2 id="preview-title">Live preview</h2><output id="dimensions">1080 × 1080</output></div>
-      <div class="stage"><canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas></div>
-      <div class="workfoot">Select a panel to frame its image</div>
+      <div class="workbar"><h2 id="preview-title">Live preview</h2><output id="dimensions">1920 × 1080</output></div>
+      <div class="stage"><canvas id="cover" width="1920" height="1080" aria-label="Live cover preview"></canvas></div>
+      <div class="workfoot">Drag a panel to position its photo. Use zoom for a closer crop.</div>
     </section>
     <aside class="sidebar inspector" aria-label="Panel settings">
       <section>
         <h2>Panels</h2>
         <div id="panels" role="group" aria-label="Select panel"></div>
-        <label class="upload" for="photo">＋ &nbsp; Replace with local photo</label>
-        <input id="photo" type="file" accept="image/*" class="visually-hidden">
+        <label class="field" for="panel-photo">Photo for selected panel</label>
+        <select id="panel-photo"></select>
+        <label class="upload" for="photo">＋ &nbsp; Add local photos</label>
+        <input id="photo" type="file" accept="image/*" multiple class="visually-hidden">
       </section>
       <section>
         <div class="line"><h2>Framing</h2><button id="reset" class="plain">Reset</button></div>

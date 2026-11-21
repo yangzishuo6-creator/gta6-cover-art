@@ -19,10 +19,12 @@ h1 span{font-size:13px;letter-spacing:0;color:var(--muted);font-weight:500;margi
 .sidebar section+section{border-top:1px solid var(--border)}
 h2{margin:0;font-size:15px;letter-spacing:-.02em}
 .field,.inspector label:not(.upload){display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
-#caption,select{width:100%;padding:9px;font-size:13px}
+#caption,#subtitle,select{width:100%;padding:9px;font-size:13px}
+.optional{float:right;font-size:10px}
 .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
 .choices button{font-size:11px;padding:7px 2px}
 .layouts button{font-size:20px;line-height:1.15}
+.layouts{grid-template-columns:repeat(4,minmax(0,1fr))}
 .layouts span{display:block;font-size:10px;margin-top:4px}
 button[aria-pressed=true]{border-color:#d39e72;background:#382932;color:#ffd19d}
 .primary{margin-top:12px;background:var(--accent);color:#28172a;border-color:var(--accent);font-weight:750;width:100%;font-size:13px}
@@ -33,7 +35,8 @@ button[aria-pressed=true]{border-color:#d39e72;background:#382932;color:#ffd19d}
 .workbar output{font:12px ui-monospace,monospace;color:var(--muted)}
 .workfoot{font-size:11px;color:var(--muted);border-top:1px solid var(--border)}
 .stage{flex:1;min-height:0;display:grid;place-items:center;padding:17px;background-color:#151318;background-image:radial-gradient(#39313e 1px,transparent 1px);background-size:17px 17px}
-canvas{display:block;width:min(100%,calc(var(--ratio,1) * var(--preview-height)));height:auto;--preview-height:max(320px,calc(100dvh - 205px));box-shadow:0 12px 35px #000a;cursor:crosshair}
+canvas{display:block;width:min(100%,calc(var(--ratio,1) * var(--preview-height)));height:auto;--preview-height:max(320px,calc(100dvh - 205px));box-shadow:0 12px 35px #000a;cursor:grab;touch-action:none}
+canvas:active{cursor:grabbing}
 #panels{display:grid;gap:6px;margin-top:12px}
 #panels button{display:flex;align-items:center;gap:8px;text-align:left;padding:5px;font-size:12px;min-width:0}
 #panels img{width:39px;height:29px;object-fit:cover;border-radius:3px;background:#49324b}
