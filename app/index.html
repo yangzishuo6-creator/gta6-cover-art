@@ -1,23 +1,68 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
-<link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#18141f">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./src/cover.js"></script>
+  <script defer src="./src/main.js"></script>
+  <title>Heatwave Poster Studio</title>
 </head>
 <body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
-  </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
-</main>
-<script type="module" src="./src/main.js"></script>
+  <header class="top">
+    <a class="brand" href="./" aria-label="Heatwave home"><span class="sun" aria-hidden="true"></span> HEATWAVE <small>Poster Studio</small></a>
+    <button id="export" class="primary" disabled>↓ &nbsp; Export PNG</button>
+  </header>
+  <main>
+    <section class="workspace" aria-label="Poster preview">
+      <div class="workspace-bar">
+        <span class="live"><i></i> Live preview</span>
+        <div id="formats" class="segmented" aria-label="Export size">
+          <button data-width="1080" data-height="1080" title="1080 × 1080">Square</button>
+          <button data-width="1080" data-height="1350" title="1080 × 1350">Portrait</button>
+          <button data-width="1920" data-height="1080" title="1920 × 1080" aria-pressed="true">Wide</button>
+        </div>
+      </div>
+      <div id="stage"><canvas id="poster" aria-label="Poster. Select a panel here or use the panel buttons."></canvas></div>
+      <div class="workspace-bar workspace-foot"><span>Drag a panel to frame its photo</span><span id="dimensions">1920 × 1080 px</span></div>
+    </section>
+    <aside class="editor" aria-label="Poster editor">
+      <div class="section-head"><h1>Cover editor</h1><button id="reset" class="quiet">Reset demo</button></div>
+      <section class="controls">
+        <h2>Lettering</h2>
+        <label for="caption">Headline <span>Enter for a new line</span></label>
+        <textarea id="caption" rows="2" maxlength="75" spellcheck="false">AFTER
+THE HEAT</textarea>
+        <label for="tagline">Tagline</label>
+        <input id="tagline" type="text" maxlength="45" spellcheck="false" value="No way back">
+      </section>
+      <section class="controls">
+        <div class="section-head"><h2>Photos</h2><button id="add" class="outline">+ Add photos</button></div>
+        <input id="files" type="file" accept="image/*" multiple hidden>
+        <div id="panels" aria-label="Select panel"></div>
+        <label for="photo">Photo in <strong id="panel-name">Panel 1</strong></label>
+        <select id="photo"></select>
+        <button id="fill" class="quiet">Use this photo in all panels</button>
+        <label for="zoom">Zoom <output id="zoom-value">100%</output></label>
+        <input id="zoom" type="range" min="1" max="4" step=".01" value="1">
+        <div class="position">
+          <div><label for="pan-x">Horizontal</label><input id="pan-x" type="range" min="0" max="1" step=".005"></div>
+          <div><label for="pan-y">Vertical</label><input id="pan-y" type="range" min="0" max="1" step=".005"></div>
+          <button id="recenter" class="outline" title="Reset crop" aria-label="Reset crop">↺</button>
+        </div>
+      </section>
+      <section class="controls">
+        <h2>Color grade</h2>
+        <div id="grades" class="segmented">
+          <button data-grade="sunset" aria-pressed="true"><i></i> Sunset</button>
+          <button data-grade="neon"><i></i> Neon</button>
+          <button data-grade="original">Original</button>
+        </div>
+      </section>
+      <p id="status" role="status">Photos stay on this device.</p>
+    </aside>
+  </main>
 </body>
 </html>
