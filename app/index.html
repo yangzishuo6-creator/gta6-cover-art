@@ -1,23 +1,69 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
-<link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Afterlight Cover Studio</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./src/cover.js"></script>
+  <script defer src="./src/main.js"></script>
 </head>
 <body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
-  </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
-</main>
-<script type="module" src="./src/main.js"></script>
+  <header class="masthead">
+    <div class="brand"><span class="mark" aria-hidden="true">◒</span><h1>Afterlight <span>Cover Studio</span></h1></div>
+    <span class="local">● &nbsp; OFFLINE EDITOR</span>
+  </header>
+  <main class="studio">
+    <aside class="sidebar" aria-label="Composition settings">
+      <section>
+        <h2>Composition</h2>
+        <div class="field">Layout</div>
+        <div class="choices layouts" role="group" aria-label="Layout">
+          <button data-layout="mosaic" aria-pressed="true">▦ <span>Mosaic</span></button>
+          <button data-layout="triptych" aria-pressed="false">▥ <span>Triptych</span></button>
+          <button data-layout="duo" aria-pressed="false">◫ <span>Split</span></button>
+        </div>
+        <label class="field" for="caption">Cover caption</label>
+        <input id="caption" maxlength="48" value="AFTER HOURS">
+        <div class="field">Color grade</div>
+        <div class="choices grades" role="group" aria-label="Color grade">
+          <button data-grade="sunset" aria-pressed="true">Sunset</button>
+          <button data-grade="neon" aria-pressed="false">Neon</button>
+          <button data-grade="none" aria-pressed="false">Original</button>
+        </div>
+      </section>
+      <section>
+        <h2>Output</h2>
+        <label class="field" for="format">Canvas size</label>
+        <select id="format">
+          <option value="square">Square · 1080 × 1080</option>
+          <option value="portrait">Portrait · 1080 × 1350</option>
+          <option value="wide">Wide · 1920 × 1080</option>
+        </select>
+        <button id="export" class="primary">↓ &nbsp; Download PNG</button>
+        <p id="status" role="status"></p>
+      </section>
+    </aside>
+    <section class="workspace" aria-labelledby="preview-title">
+      <div class="workbar"><h2 id="preview-title">Live preview</h2><output id="dimensions">1080 × 1080</output></div>
+      <div class="stage"><canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas></div>
+      <div class="workfoot">Select a panel to frame its image</div>
+    </section>
+    <aside class="sidebar inspector" aria-label="Panel settings">
+      <section>
+        <h2>Panels</h2>
+        <div id="panels" role="group" aria-label="Select panel"></div>
+        <label class="upload" for="photo">＋ &nbsp; Replace with local photo</label>
+        <input id="photo" type="file" accept="image/*" class="visually-hidden">
+      </section>
+      <section>
+        <div class="line"><h2>Framing</h2><button id="reset" class="plain">Reset</button></div>
+        <label>Zoom <output id="zoom-value"></output><input type="range" id="zoom" min="100" max="300" value="100"></label>
+        <label>Horizontal <output id="x-value"></output><input type="range" id="x" min="-100" max="100" value="0"></label>
+        <label>Vertical <output id="y-value"></output><input type="range" id="y" min="-100" max="100" value="0"></label>
+      </section>
+    </aside>
+  </main>
 </body>
 </html>
